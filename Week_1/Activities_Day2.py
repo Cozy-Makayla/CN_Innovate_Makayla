@@ -46,6 +46,14 @@ def ghost_game(char_list):
                 case 'N' | "NO":
                     print(f'{pressed_question} is not a charater in the movie!')
                     p_lives -= 1
+                case _:
+                    print('Error')
+            if user_answer.capitalize() == 'Y' or user_answer.capitalize() == 'YES':
+                print(f'{pressed_question} is indeed a charater in the movie!')
+                p_score += 1
+            else:
+                print(f'{pressed_question} is not a charater in the movie!')
+                p_lives -= 1
         else:
             match user_answer.capitalize():
                 case 'Y' | "YES":
@@ -63,7 +71,7 @@ while True:
         print(f'New High Score!! {score} Points!')
         hscore = score
     else:
-        print(f'High Score remains at {previous_score} Points!')
+        print(f'High Score remains at {hscore} Points!')
     p_continue = input('Play again? Y | N')
     match p_continue.capitalize():
         case 'Y' | 'N':
