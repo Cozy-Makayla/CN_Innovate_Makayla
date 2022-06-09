@@ -1,0 +1,37 @@
+@font-face {
+    font-family: "ShareTechMono";
+    src: url(./fonts/ShareTechMono-Regular.ttf);
+}
+
+h1 {
+    font-family: "ShareTechMono";
+    font-size: 50px;
+    text-align: center;
+    color: white;
+    padding: 3px;
+    background-color:indigo;
+    border-radius: 20px;
+}
+
+h1:hover{
+    font-family: "ShareTechMono";
+    font-size: 50px;
+    text-align: center;
+    color:linen;
+    background-color: blueviolet;
+}
+
+p {
+    font-family: "ShareTechMono";
+    font-size: 24px;
+    text-align: justify;
+    color: white;
+    padding: 8px;
+    background-color:indigo;
+    border-radius: 20px;
+}
+
+* {
+    background-color: purple;
+}
+
