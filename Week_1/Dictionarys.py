@@ -42,11 +42,11 @@ def item_select():
 # Activity 2
 
 countries = {
-    'uk' : "manchester",
-    'france' : 'paris',
-    'germany' : 'berlin',
-    'spain' : 'madrid',
-    'italy' : 'rome'
+    "country_1" : {'name': 'england', 'capital' : "manchester",},
+    "country_2" : {'name': 'fance', 'capital' : "paris",},
+    "country_3" : {'name': 'germany', 'capital' : "berlin",},
+    "country_4" : {'name': 'spain', 'capital' : "madrid",},
+    "country_5" : {'name': 'italy', 'capital' : "rome",},
 }
 
 languages = [
@@ -55,8 +55,8 @@ languages = [
     'german',
     'spannish',
     'italian',
-    'please change me',
-    'please change me'
+    'English',
+    'Japanese'
 ]
 
 def add_country(country: str, capital: str):
@@ -64,32 +64,32 @@ def add_country(country: str, capital: str):
 
 def dict_inspect(item:dict):
     print('#######################')
-    for x in item:
-        print(f'|{x :6} > {item[x]:12}|')
+    print(item)
+    # for x in item:
+        # print(f'|{x :6} > {item[x]:12}|')
     print('#######################')
 
 def refactor_dict(item:dict):
-    i = 0
     for x in item:
-        print(languages[i])
-        item.update(languages[i])
-        i += 1
+        item[x].pop('capital')
+    return item
 
-def define_new_country():
-    user_adding = True
-    while user_adding:
-        user_add_country = input('Please type the name of the contry you wish to add: ')
-        user_add_capital = input('Please type the name of the capital for that contry: ')
-        add_country(user_add_country, user_add_capital)
-        continue_query = input('would you like to add another? Y|N \n')
-        match continue_query.capitalize():
-            case 'Y' | 'YES': print('returning ...')
-            case 'N' | 'NO': user_adding = False
+def define_new_country(countries: dict):
+    # user_adding = True
+    # while user_adding:
+    #     user_add_country = input('Please type the name of the contry you wish to add: ')
+    #     user_add_capital = input('Please type the name of the capital for that contry: ')
+    #     add_country(user_add_country, user_add_capital)
+    #     continue_query = input('would you like to add another? Y|N \n')
+    #     match continue_query.capitalize():
+    #         case 'Y' | 'YES': print('returning ...')
+    #         case 'N' | 'NO': user_adding = False
+    countries.setdefault(country, capital)
     dict_inspect(countries)
-    refactor_dict(countries)
+    countries = refactor_dict(countries)
     dict_inspect(countries)
 
-define_new_country()
+define_new_country(countries)
 
 #ACT 3
 

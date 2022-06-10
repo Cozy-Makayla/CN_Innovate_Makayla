@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat+Alternates:900');
+
+* {
+    box-sizing: border-box;
+    background-color: black;
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-grow: 1;
+    /* padding: 15px; */
+    /* flex-flow: row wrap; */
+}
+
+.box {
+    display: flex;
+    color: white;
+    font-size: 100px;
+    font-family: 'Montserrat Alternates', sans-serif;
+    text-align: center;
+    padding: 15px;
+    
+    /* width: 400px; */
+    
+}
+
+/* Colours for each box */
+
+.box1 { background: #eccc68; align-items: center; }
+.box2 { background: #ff6348; align-items: center;}
+.box3 { background: #ff7f50; align-items: center;}
+.box4 { background: #ff4757; align-items: center;}
+.box5 { background: #f1c40f; align-items: center;}
+.box6 { background: #e67e22; align-items: center;}
+.box7 { background: #2ed573; align-items: center;}
+.box8 { background: #1e90ff; align-items: center;}
+.box9 { background: #c56cf0; align-items: center;}
+.box10 { background: #18dcff; align-items: center;}
+
+.box1:hover{ background: #eccc68; flex-grow: 1; align-items: center;}
+.box2:hover{ background: #ff6348; flex-grow: 1; align-items: center;}
+.box3:hover{ background: #ff7f50; flex-grow: 1; align-items: center;}
+.box4:hover{ background: #ff4757; flex-grow: 1; align-items: center;}
+.box5:hover{ background: #f1c40f; flex-grow: 1; align-items: center;}
+.box6:hover{ background: #e67e22; flex-grow: 1; align-items: center;}
+.box7:hover{ background: #2ed573; flex-grow: 1; align-items: center;}
+.box8:hover{ background: #1e90ff; flex-grow: 1; align-items: center;}
+.box9:hover{ background: #c56cf0; flex-grow: 1; align-items: center;}
+.box10:hover{ background: #18dcff; flex-grow: 1; align-items: center;}
