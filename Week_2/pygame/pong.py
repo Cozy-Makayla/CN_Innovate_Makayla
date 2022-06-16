@@ -3,22 +3,30 @@ from random import choice
 
 pygame.init()   # starts the pygame modules (required for pygame to run)
 
+
 WHITE = pygame.Color(255, 255, 255)
 L_GREY = pygame.Color(200, 200, 200)
 RED = pygame.Color(255, 0, 0)
 GREEN = pygame.Color(0, 255, 0)
 BLUE = pygame.Color(0, 0, 255)
 BLACK = pygame.Color(0, 0, 0)
+YELLOW = pygame.Color(125, 125, 0)
+PURPLE = pygame.Color(125, 0, 125)
+PINK = pygame.Color(255, 125, 125)
 
 screen_width = 800
 screen_height = 600
+my_font = pygame.font.Font('ShareTechMono-Regular.ttf', 64)
 screen = pygame.display.set_mode((screen_width, screen_height))
 clock = pygame.time.Clock()
+
+ball_cords = []
+
 player_score = 0
 opponent_score = 0
 prev_collision = 'null'
-ball_speed_x = 7
-ball_speed_y = 7
+ball_speed_x = 8
+ball_speed_y = 8
 player_speed = 0
 opponent_speed = 0
 x = 0
@@ -41,7 +49,34 @@ opponent = pygame.Rect(
     20, 140
 )
 
-score_board = pygame.Rect(0, screen_height - 5, 30, 10)
+score_board_opponent = pygame.Rect(screen_width /4 + (-5), (screen_height /2) +5, 300, 100)
+score_board_player = pygame.Rect(screen_width /2 + ((screen_width /4) +5), (screen_height /2) +5, 300, 100)
+text_surface_opponent = my_font.render(f'Welcome to King Pong!', False, (255, 255, 255))
+text_surface_player = my_font.render(f'Welcome to King Pong!', False, (255, 255, 255))
+
+
+def ball_trail():
+    global ball_cords, x
+    if x <= 6:
+        ball_cords.append(ball.x)
+        ball_cords.append(ball.y)
+        print(ball_cords)
+    elif x > 6:
+        ball_cords.append(ball.x)
+        ball_cords.append(ball.y)
+        ball_cords.pop(0)
+        ball_cords.pop(1)
+        ballt2 = pygame.Rect(ball_cords[2], ball_cords[3], 20, 20)
+        ballt3 = pygame.Rect(ball_cords[4], ball_cords[5], 20, 20)
+        ballt4 = pygame.Rect(ball_cords[6], ball_cords[7], 20, 20)
+        ballt5 = pygame.Rect(ball_cords[8], ball_cords[9], 20, 20)
+        ballt6 = pygame.Rect(ball_cords[10], ball_cords[11], 20, 20)
+        pygame.draw.ellipse(screen, GREEN, ballt2)
+        pygame.draw.ellipse(screen, YELLOW, ballt3)
+        pygame.draw.ellipse(screen, RED, ballt4)
+        pygame.draw.ellipse(screen, PURPLE, ballt5)
+        pygame.draw.ellipse(screen, BLUE, ballt6)
+    x += 1
 
 def ball_animation():
     global ball_speed_x
@@ -74,9 +109,9 @@ def paddle_animation():
     global opponent_speed
     if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_DOWN:
-                player_speed = 5
+                player_speed = 7
             if event.key == pygame.K_UP:
-                player_speed = -5
+                player_speed = -7
     if event.type == pygame.KEYUP:
             if event.key == pygame.K_DOWN:
                 player_speed = 0
@@ -87,9 +122,9 @@ def paddle_animation():
     if player.bottom >= screen_height:
         player.bottom = screen_height
     if opponent.top <= ball.y:
-        opponent_speed = 5
+        opponent_speed = 10
     if opponent.bottom >= ball.y:
-        opponent_speed = -5
+        opponent_speed = -10
     if opponent.top <= 0:
         opponent.top = 0
     if opponent.bottom >= screen_height:
@@ -104,7 +139,7 @@ def draw_rects():
     # pygame.draw.rect(screen,)
     pygame.draw.rect(screen, GREEN, player, 0, 10)
     pygame.draw.rect(screen, RED, opponent, 0, 10)
-    pygame.draw.ellipse(screen, BLUE + GREEN, ball)
+    pygame.draw.ellipse(screen, PINK, ball)
 
 def ball_reset():
     global ball_speed_y
@@ -116,11 +151,14 @@ def ball_reset():
     prev_collision = 'null'
 
 def score(paddle):
-    global player_score, opponent_score
+    global player_score, opponent_score, text_surface_opponent, text_surface_player
     if paddle == 'player':
-        player_score =+1
+        player_score = player_score + 1
     if paddle == 'opponent':
-        opponent_score =+1
+        opponent_score =+ opponent_score + 1
+    text_surface_opponent = my_font.render(f'{opponent_score}', True, (255, 255, 255))
+    text_surface_player = my_font.render(f'{player_score}', True, (255, 255, 255))
+
 
 pygame.display.set_caption("KING-PONG!")
 
@@ -129,11 +167,11 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-    x += 1
-    if x >= 10:
-            screen.fill(BLACK)
-            x = 0
+    screen.fill(BLACK)
+    screen.blit(text_surface_opponent, score_board_opponent)
+    screen.blit(text_surface_player, score_board_player)
     ball_animation()
+    ball_trail()
     paddle_animation()
     draw_rects()
     player.y += player_speed
